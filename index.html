@@ -1,185 +1,295 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>To Do List</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Calculator</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Monomaniac+One&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Monomaniac One', sans-serif;
+            background-color: black;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .calculator {
+            transform: scale(1.6);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            width: 200px;
+        }
+
+        .result {
+            grid-column: 1 / span 4;
+            height: 40px;
+            text-align: right;
+            box-shadow: 0 0 5px #B2FF59, 0 0 8px #B2FF59, 0 0 10px #B2FF59, 0 0 20px #B2FF59, 0 0 15px #00C853, 0 0 20px #00C853;
+            border: 1px solid #00ff00;
+            padding: 5px;
+            border-radius: 5px;
+            background-color: black;
+            color: #00ff00;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .buttonnull {
+            grid-column: 2 / span 2;
+            text-align: right;
+            border: 1px solid #ffff00;
+            padding: 5px;
+            box-shadow: 0 0 5px #FFFF00, 0 0 8px #FFFF00, 0 0 10px #FFFF00, 0 0 20px #FFFF00, 0 0 15px #FFDF00, 0 0 20px #FFDF00;
+            border-radius: 5px;
+            background-color: black;
+            color: #ffff00;
+            text-align: center;
+            font-size: 15px;
+        }
+
+        .button {
+            height: 40px;
+            text-align: center;
+            box-shadow: 0 0 5px #B2FF59, 0 0 8px #B2FF59, 0 0 10px #B2FF59, 0 0 20px #B2FF59, 0 0 15px #00C853, 0 0 20px #00C853;
+            border-radius: 5px;
+            line-height: 40px;
+            background-color: black;
+            color: #00ff00;
+            cursor: pointer;
+            border: 1px solid #00ff00;
+        }
+
+        .button:hover {
+            background-color: #00ff00;
+            color: black;
+        }
+
+        .button2 {
+            height: 40px;
+            text-align: center;
+            box-shadow: 0 0 5px #F1CBFF, 0 0 8px #F1CBFF, 0 0 10px #F1CBFF, 0 0 20px #F1CBFF, 0 0 15px #8E4585, 0 0 20px #8E4585;
+            border-radius: 5px;
+            line-height: 40px;
+            background-color: black;
+            color: #ff00cc;
+            cursor: pointer;
+            border: 1px solid #ff00cc;
+        }
+
+        .button2:hover {
+            background-color: #ff00cc;
+            color: black;
+        }
+
+        .button3 {
+            height: 40px;
+            text-align: center;
+            border-radius: 5px;
+            box-shadow: 0 0 5px #87CEEB, 0 0 8px #87CEEB, 0 0 10px #87CEEB, 0 0 20px #87CEEB, 0 0 15px #4169E1, 0 0 20px #4169E1;
+            line-height: 40px;
+            background-color: black;
+            color: #00dfff;
+            cursor: pointer;
+            border: 1px solid #00dfff;
+        }
+
+        .button3:hover {
+            background-color: #00dfff;
+            color: black;
+        }
+
+        #history {
+            height: 46vh;
+            position: absolute;
+            width: 23vw;
+            right: 3vw;
+            bottom: 20vh;
+            background-color: black;
+            color: #00dfff;
+            border: 1px solid #00dfff;
+            border-radius: 5px;
+        }
+
+        .buttonclear {
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 3px;
+            border-radius: 5px;
+            background-color: black;
+            color: red;
+            cursor: pointer;
+            border: 1px solid red;
+        }
+
+        .buttonclear:hover {
+            background-color: red;
+            color: white;
+        }
+
+        .histchild1 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #history hr {
+            width: 80%;
+        }
+
+        .histchild2 {
+            color: #00dfff;
+            height: 80%;
+            width: 100%;
+            overflow-y: auto;
+        }
+
+        .histitem {
+            
+            padding:5px;
+            text-align: right;
+        }
+    </style>
 </head>
 
 <body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
-        crossorigin="anonymous"></script>
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-
-            
-
-            <a class="navbar-brand" href="#"><b>To Do List</b></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Settings
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Technologies used:</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">HTML</a></li>
-                            <li><a class="dropdown-item" href="#">Bootstrap</a></li>
-                            <li><a class="dropdown-item" href="#">Javascript</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Contact
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Made By:</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Anup Dhoble</a></li>
-                            <li><a class="dropdown-item" href="#">anupdhoble15@gmail.com</a></li>
-                            <li><a class="dropdown-item" href="#">CSE First Year B.E. RCOEM</a></li>
-                            
-                        </ul>
-                    </li>
-                </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-            </div>
+    <div id="container">
+        <div class="calculator">
+            <div class="result" id="result">0</div>
+            <div class="button" onclick="clearResult()">Clear</div>
+            <div class="button" onclick="toggleSign()">+/-</div>
+            <div class="button2" onclick="appendOperator('+')">+</div>
+            <div class="button2" onclick="appendOperator('-')">-</div>
+            <div class="button3" onclick="appendNumber('7')">7</div>
+            <div class="button3" onclick="appendNumber('8')">8</div>
+            <div class="button3" onclick="appendNumber('9')">9</div>
+            <div class="button2" onclick="appendOperator('.')">.</div>
+            <div class="button3" onclick="appendNumber('4')">4</div>
+            <div class="button3" onclick="appendNumber('5')">5</div>
+            <div class="button3" onclick="appendNumber('6')">6</div>
+            <div class="button2" onclick="appendOperator('*')">*</div>
+            <div class="button3" onclick="appendNumber('1')">1</div>
+            <div class="button3" onclick="appendNumber('2')">2</div>
+            <div class="button3" onclick="appendNumber('3')">3</div>
+            <div class="button2" onclick="appendOperator('/')">/</div>
+            <div class="button3" onclick="appendNumber('0')">0</div>
+            <div class="buttonnull" onclick="appendNumber('0')">Anup B27</div>
+            <div class="button" onclick="calculate()">=</div>
         </div>
-    </nav>
-
-    <div class="container my-4">
-        <h2 class="text-center">TODOs List</h2>
     </div>
-    <div style="padding: 20px;">
-        <div class="mb-3">
-          <label for="title" class="form-label">Title</label>
-          <input type="email" class="form-control" id="title" aria-describedby="emailHelp">
-          <div id="emailHelp" class="form-text">Add an item to list.</div>
+    <div id="history">
+        <div class="histchild1">
+            History<br>
+            <div class="buttonclear" onclick="clearHistory()">Clear</div>
+            <hr>
         </div>
-        
-        <div class="form-floating" style="margin-bottom:10px;">
-            <textarea class="form-control" placeholder="Leave a comment here" id="description" style="height: 100px"></textarea>
-            <label for="description">Description</label>
-          </div>
-           
-        <button  id="add" class="btn btn-primary">Add to list</button>
-        <button  id="clear" class="btn btn-primary" onclick="clearnotreserved()">Clear list</button>
-        </div>
-      <div id="items" class="my-4" style="padding: 20px;;">
-        <h2>Your Items</h2>
-        <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Sr.No.</th>
-                <th scope="col">Title</th>
-                <th scope="col">Description</th>
-                <th scope="col">Action</th>
-                
-              </tr>
-            </thead>
-            <tbody id="tablebody">
-              <tr>
-                <th scope="row">1</th>
-                <td>Get Some Coffee</td>
-                <td>You need coffee as you are a coder.</td>
-                <td><button class="btn btn-sm btn-primary">Delete</button></td>
-               
-              </tr>
-              
-            </tbody>
-          </table>
-      </div>
-
+        <div class="histchild2"></div>
+    </div>
     <script>
-        function getAndupdate(){
-            console.log("Updating List...")
-            tit = document.getElementById('title').value;
-            desc = document.getElementById('description').value;
-            if (localStorage.getItem('itemsJSON')==null){
-                itemJSONarray = [];
-                itemJSONarray.push([tit,desc]);
-                localStorage.setItem('itemsJSON',JSON.stringify(itemJSONarray));
-            }
-            else{
-                itemJSONarraystr = localStorage.getItem('itemsJSON')
-                itemJSONarray = JSON.parse(itemJSONarraystr);
-                itemJSONarray.push([tit,desc]);
-                localStorage.setItem('itemsJSON',JSON.stringify(itemJSONarray));
-            }
-            update();
-            document.getElementById('title').value="";
-            document.getElementById('description').value="";
-        }
-        function update(){
-            if (localStorage.getItem('itemsJSON')==null){
-                itemJSONarray = [];
-                localStorage.setItem('itemsJSON',JSON.stringify(itemJSONarray));
-            }
-            else{
-                itemJSONarraystr = localStorage.getItem('itemsJSON')
-                itemJSONarray = JSON.parse(itemJSONarraystr);
-               
-            }
-            //Populate the table
-            let tablebody= document.getElementById('tablebody')
-            let str="";
-            itemJSONarray.forEach((element, index) => {
-                str += `
-                <tr>
-                <th scope="row">${index+1}</th>
-                <td>${element[0]}</td>
-                <td>${element[1]}</td>
-                <td><button class="btn btn-sm btn-primary" onclick="deleted(${index})">Delete</button></td>
-               </tr>`;
+        let currentResult = "0";
 
-            });
-            tablebody.innerHTML = str;
-        }
-        add = document.getElementById("add");
-        add.addEventListener("click",getAndupdate);
-        
-        update();
-        function deleted(itemIndex){
-            console.log("Delete",itemIndex)
-            itemJSONarraystr = localStorage.getItem('itemsJSON');
-            itemJSONarray = JSON.parse(itemJSONarraystr);
-            //delete item inex from array
-            itemJSONarray.splice(itemIndex,1);
-            localStorage.setItem('itemsJSON',JSON.stringify(itemJSONarray));//save array
+        function updateResult() {
+            document.getElementById("result").textContent = currentResult;
+           
             update();
         }
-        function clearnotreserved(){
-            if(confirm("Do you want to clear whole list?")){
-            console.log('Clearing the storage...');
-            localStorage.clear();
-            update();}
+
+        function appendNumber(num) {
+            if (currentResult === "0") {
+                currentResult = num;
+            } else {
+                currentResult += num;
+            }
+            updateResult();
         }
+
+        function appendOperator(operator) {
+            currentResult += operator;
+            updateResult();
+        }
+
+        function calculate() {
+            try {
+                getAndupdate();
+                currentResult = eval(currentResult);
+                updateResult();
+            } catch (error) {
+                currentResult = "Error";
+                updateResult();
+            }
+        }
+
+        function clearResult() {
+            currentResult = "0";
+            updateResult();
+        }
+
+        function toggleSign() {
+            currentResult = eval(-1 * currentResult);
+            updateResult();
+        }
+
+        function getAndupdate() {
+            console.log("Updating List...");
+            qans = currentResult;
+            ans=eval(currentResult);
+
+            if (localStorage.getItem('itemJSON') == null) {
+                itemJSONarray = [];
+                itemJSONarray.push([qans,ans]);
+                localStorage.setItem('itemJSON', JSON.stringify(itemJSONarray));
+            } else {
+                itemJSONarraystr = localStorage.getItem('itemJSON');
+                itemJSONarray = JSON.parse(itemJSONarraystr);
+                itemJSONarray.push([qans,ans]);
+                localStorage.setItem('itemJSON', JSON.stringify(itemJSONarray));
+            }
+        }
+
+        function update() {
+            if (localStorage.getItem('itemJSON') == null) {
+                itemJSONarray = [];
+                localStorage.setItem('itemJSON', JSON.stringify(itemJSONarray));
+            } else {
+                itemJSONarraystr = localStorage.getItem('itemJSON')
+                itemJSONarray = JSON.parse(itemJSONarraystr);
+
+            }
+            //Populate history
+            let listbody = document.querySelector('.histchild2');
+            let str = "";
+            itemJSONarray.forEach((element) => {
+                str += `
+                <div class="histitem">${element[0]} <br> = ${element[1]}</div>
+                <center><hr></center>
+                `;
+            });
+            listbody.innerHTML = str;
+        }
+
+        function clearHistory() {
+            localStorage.removeItem('itemJSON');
+            update();
+        }
+
+        // Update history on page load
+        window.onload = update();
     </script>
 </body>
 
